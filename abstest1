@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+    }
+    .btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="mb-4">Invoice Form</h2>
+  <form id="invoiceForm">
+    <div class="form-group">
+      <label for="customerName">Customer Name:</label>
+      <input type="text" class="form-control" id="customerName" placeholder="Enter customer name" required>
+    </div>
+    <div class="form-group">
+      <label for="productName">Product Name:</label>
+      <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity:</label>
+      <input type="number" class="form-control" id="quantity" placeholder="Enter quantity" required>
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" class="form-control" id="price" placeholder="Enter price" required>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="generateInvoice()">Generate Invoice</button>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+<script>
+  function generateInvoice() {
+    const customerName = document.getElementById('customerName').value;
+    const productName = document.getElementById('productName').value;
+    const quantity = document.getElementById('quantity').value;
+    const price = document.getElementById('price').value;
+
+    const totalAmount = quantity * price;
+
+    const docDefinition = {
+      content: [
+        { text: 'Invoice', style: 'header' },
+        { text: `Customer Name: ${customerName}` },
+        { text: `Product Name: ${productName}` },
+        { text: `Quantity: ${quantity}` },
+        { text: `Price: $${price}` },
+        { text: `Total Amount: $${totalAmount}` }
+      ],
+      styles: {
+        header: {
+          fontSize: 22,
+          bold: true,
+          margin: [0, 0, 0, 20]
+        }
+      }
+    };
+
+    pdfMake.createPdf(docDefinition).download('invoice.pdf');
+  }
+</script>
+
+</body>
+</html>
