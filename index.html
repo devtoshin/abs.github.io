@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Inspection Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Custom CSS -->
+    <style>
+
+
+
+        .loogo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Custom CSS styles */
+        .form-section {
+            margin-bottom: 30px;
+        }
+        .form-section-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .form-section-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .preview-image {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+
+        /* .form-control {
+            height: calc(1.5em + .75rem + 2px) !important;
+        } */
+		
+		/* CSS for printing */
+ @media print {
+    
+            /* Hide unnecessary elements */
+            body * {
+                visibility: hidden;
+                
+            }
+            .container, .container * {
+                visibility: visible;
+                font-size: 24px;
+            }
+            /* Adjust image resolution */
+            .preview-image {
+                max-width: 200px;
+                max-height: 200px;
+            }
+            /* Borderless input fields */
+            input[type="text"],
+            input[type="date"],
+            textarea {
+                border: none !important;
+                background-color: transparent !important;
+            }
+			/* Hide print and save buttons */
+            .print-buttons {
+                display: none;
+            }
+			.choosefile, .comment {
+				display: none;
+			}
+            textarea {
+    overflow: auto; /* Ensure content is not cut off */
+    height: auto; /* Allow the textarea to expand as needed */
+    width: 100%; /* Adjust width as needed */
+  }
+            
+			
+			
+			
+        } 
+
+        /* Custom CSS styles */
+
+body {
+    background: linear-gradient(135deg, #000000, #ffffff); /* Black and white gradient background */
+    font-family: 'Roboto', sans-serif; /* Nice font */
+}
+
+.container {
+    background-color: rgb(255, 255, 255); /* Lightweight background */
+    padding: 30px;
+    border-radius: 0px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    margin-top: 0;
+    
+}
+
+
+.form-section-header {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333; /* Dark text color */
+}
+
+.form-section-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333; /* Dark text color */
+}
+
+textarea {
+    font-family: 'Roboto', sans-serif; /* Nice font */
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    padding: 15px;
+    transition: border-color 0.3s ease-in-out; /* Smooth border transition */
+    width: 100%; /* Make textarea responsive */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    
+    
+
+}
+textarea.form-control {
+    height: 40px;
+}
+
+
+
+
+textarea:focus {
+    border-color: #007bff; /* Blue border color on focus */
+}
+
+.preview-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: transform 0.3s ease-in-out; /* Smooth transformation */
+}
+
+.preview-image:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+
+/* Print CSS */
+@media print {
+    
+    body {
+        background: rgb(255, 255, 255); /* Remove background for printing */
+        border: 3px dashed #000000;
+        margin: 0;
+    }
+    .container {
+        width: 30%;
+        
+        box-shadow: none; /* Remove shadow for printing */
+        /* background-color: transparent;  Transparent background for printing */
+    }
+    
+    .print-buttons {
+        display: none; /* Hide print and save buttons for printing */
+    }
+    .choosefile,
+    .comment {
+        display: none; /* Hide file input and comment fields for printing */
+    }
+    textarea {
+        resize: none;
+        overflow: hidden;
+    }
+}
+
+.preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff; /* Background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999; /* Ensure preloader is on top of everything */
+            opacity: 1; /* Initial opacity */
+            transition: opacity 0.5s ease; /* Smooth opacity transition */
+        }
+        .preloader.hidden {
+            opacity: 0; /* Fade out the preloader */
+            pointer-events: none; /* Disable pointer events */
+        }
+
+        .preloader img {
+            width: 100px; /* Adjust the width of the logo as needed */
+            height: auto;
+            animation: spin .4s linear infinite; /* Rotation animation */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .logo {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  
+  .main-text {
+    font-size: 3rem;
+    color: #333;
+  }
+  
+  .sub-text {
+    font-size: 1rem;
+    color: #666;
+  }
+
+    </style>
+</head>
+<body>
+    <div class="preloader" id="preloader">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPPmPUfVjMMpUwozTezjZMF3oTuNNy06ARY5WDOijrbehLoT_uaNJpV-Q_sIPUrCnsqvH1VqMsAk2_TKEQ3KEER7sFhZLx-eT5tF2ogJN3v_5ToAImWgG9YoTG-l4TyoMj07mtFKRlD6KkM9-jJyKsy-1SInH7g5L0Ctabg4E6Rilaqx2imfYtxN5fR34U/w200-h200/423062681_937187797758280_7819845118826207981_n.png" alt="Preloader">
+    </div>
+    <div class="container" id="">
+        
+        
+        <!-- Second Section -->
+        <div class="roww" id="mainContent">
+            <!-- First Section -->
+        <div class="roww">
+            <div class="logo">
+                <div class="main-text">ABS</div>
+                <div class="sub-text">Apparel Buyer Solution</div>
+                <textarea class="form-control autogrow" id="project" placeholder="" >Final Inspection</textarea>
+              </div>
+
+
+            <!-- <div class="loogo" id="loogo">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPPmPUfVjMMpUwozTezjZMF3oTuNNy06ARY5WDOijrbehLoT_uaNJpV-Q_sIPUrCnsqvH1VqMsAk2_TKEQ3KEER7sFhZLx-eT5tF2ogJN3v_5ToAImWgG9YoTG-l4TyoMj07mtFKRlD6KkM9-jJyKsy-1SInH7g5L0Ctabg4E6Rilaqx2imfYtxN5fR34U/w200-h200/423062681_937187797758280_7819845118826207981_n.png" alt="Logo">
+                <textarea class="form-control autogrow" id="project" placeholder="" >Final Inspection</textarea>
+            </div> -->
+        </div>
+
+        <br><br><br>
+        
+            <div class="colg">
+                <h2 class="form-section-header">Inspection Details</h2>
+                <!-- Inspection Details Fields -->
+                <div class="form-group">
+                    <label>Scheduled Inspection Date</label>
+                    <input type="date" class="form-control" id="scheduledInspectionDate" >
+                </div>
+                <div class="form-group">
+                    <label for="">Submitted Inspection Date</label>
+                    <input type="date" class="form-control" id="submittedInspectionDate">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="reportType" value="Report Type: ">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="project" placeholder="" >Project: </textarea>
+                    
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="inspector" placeholder="">Inspector: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="supplier" placeholder="">Supplier: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="buyer" placeholder="">Buyer: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="qtyToInspect" placeholder="">Qty to Inspect: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="totalPOItemsQty" placeholder="">Total PO Items Qty: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="sampleInspected" placeholder="">Sample Inspected: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="approvedBy" placeholder="">Approved By: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="contactName" placeholder="">Contact Name: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="contactNumber" placeholder="">Contact Number: </textarea>
+                </div>
+                <div class="form-group">
+                    <label>Created Date</label>
+                    <input type="date" class="form-control" id="createdDate" placeholder="">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="sampleSize" placeholder="">Sample Size: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="company" placeholder="">Company: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="bookingComments" placeholder="">Booking Comments: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="poNumber" placeholder="">PO #: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="etd" placeholder="">ETD: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="eta" placeholder="">ETA: </textarea>
+                </div>
+                <div class="form-group">
+                    <label>Order Date</label>
+                    <input type="date" class="form-control" id="orderDate" placeholder="">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="origin" placeholder="">Origin: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="supplierERPId" placeholder="">Supplier ERP ID: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="description" placeholder="">Description: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="retailPrice" placeholder="">Retail Price: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="style" placeholder="">Style: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="size" placeholder="">Size: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="packingType" placeholder="">Packing Type: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="ymMasterPO" placeholder="">YM Master PO: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="inspectedQtyPcs" placeholder="">Inspected Qty (Pcs): </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="color" placeholder="">Color: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="masterCartonPackedQty" placeholder="">Master Carton / Packed Qty: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="department" placeholder="">Department: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="ymStyleNumber" placeholder="">YM STYLE Number: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="masterCartonPackedQtyCtns" placeholder="">Master Carton / Packed Quantity (Ctns): </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="percentagePacked" placeholder="">Percentage packed (%): </textarea>
+                </div>
+    
+                <!-- Checklists Section -->
+                <h2 class="form-section-header">Checklists</h2>
+                <!-- Checklists Fields -->
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="checklists" placeholder="">Checklists: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="packagingLabelling" placeholder="">Packing, Packaging & Labelling: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="product" placeholder="">Product: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="qualityPlanDefects" placeholder="">Total Product + Quality Plan Defects: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="acceptRejectQty" placeholder="">Accept/Reject Qty: </textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="comments" placeholder="Comments:" rows="5"></textarea>
+                </div>
+    
+                <!-- Photo Upload Section -->
+                <h2 class="form-section-header">Add Photos</h2>
+    
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="comment1" placeholder="Comment"></textarea>
+                    <input type="file" class="form-control-file choosefile" id="photoUpload1" accept="image/*" multiple>
+                    <div id="photoPreview1"></div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="comment2" placeholder="Comment"></textarea>
+                    <input type="file" class="form-control-file choosefile" id="photoUpload2" accept="image/*" multiple>
+                    <div id="photoPreview2"></div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="comment3" placeholder="Comment"></textarea>
+                    <input type="file" class="form-control-file choosefile" id="photoUpload3" accept="image/*" multiple>
+                    <div id="photoPreview3"></div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control autogrow" id="comment4" placeholder="Comment"></textarea>
+                    <input type="file" class="form-control-file choosefile" id="photoUpload4" accept="image/*" multiple>
+                    <div id="photoPreview4"></div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Print and Save buttons -->
+        <div class="row print-buttons">
+            <div class="col-lg-6">
+                <button class="btn btn-primary" onclick="window.print()">Print</button>
+                <button class="btn btn-success" onclick="convertHTMLtoPDF()" >Save As</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Function to preview uploaded images
+        function previewImages(inputId, previewId) {
+            var preview = document.getElementById(previewId);
+            var files   = document.getElementById(inputId).files;
+            
+            preview.innerHTML = '';
+            
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'preview-image';
+                    preview.appendChild(img);
+                }
+                
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Trigger previewImages function when files are selected
+        document.getElementById('photoUpload1').addEventListener('change', function() {
+            previewImages('photoUpload1', 'photoPreview1');
+        });
+        document.getElementById('photoUpload2').addEventListener('change', function() {
+            previewImages('photoUpload2', 'photoPreview2');
+        });
+        document.getElementById('photoUpload3').addEventListener('change', function() {
+            previewImages('photoUpload3', 'photoPreview3');
+        });
+        document.getElementById('photoUpload4').addEventListener('change', function() {
+            previewImages('photoUpload4', 'photoPreview4');
+        });
+        // For Auto Expanding Textarea while writing
+var textareas = document.querySelectorAll('.autogrow');
+textareas.forEach(function(textarea) {
+    textarea.addEventListener('input', function() {
+        var buffer = 10; // Adjust the buffer value as needed
+        this.style.height = '40px'; // Increase initial height to 60px
+        this.style.height = (this.scrollHeight + buffer) + 'px'; // Add buffer to dynamic height calculation
+    });
+});
+
+
+
+    </script>
+
+<script>
+    // Hide preloader after a delay
+    setTimeout(function() {
+        var preloader = document.getElementById("preloader");
+        var mainContent = document.getElementById("mainContent");
+        preloader.style.display = "none"; // Hide the preloader
+        mainContent.style.display = "block"; // Show the main content
+    }, 800); // Adjust the delay (in milliseconds) as needed
+
+    
+    function convertHTMLtoPDF() {
+            const { jsPDF } = window.jspdf;
+ 
+            let doc = new jsPDF('p', 'mm', [1600, 1200]);
+            let pdfjs = document.querySelector('#mainContent');
+ 
+            doc.html(pdfjs, {
+                callback: function(doc) {
+                    doc.save("newpdf.pdf");
+                },
+                x: 12,
+                y: 12
+            });                
+        }    
+
+</script>
+
+</body>
+</html>
