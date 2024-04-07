@@ -7,8 +7,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- PDFMAKE  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
     <!-- Custom CSS -->
     <style>
 
@@ -242,7 +245,7 @@ textarea:focus {
             <div class="logo">
                 <div class="main-text">ABS</div>
                 <div class="sub-text">Apparel Buyer Solution</div>
-                <textarea class="form-control autogrow" id="project" placeholder="" >Final Inspection</textarea>
+                <textarea class="form-control autogrow" id="final_inspection" placeholder="Final Inspection" ></textarea>
               </div>
 
 
@@ -258,140 +261,140 @@ textarea:focus {
                 <h2 class="form-section-header">Inspection Details</h2>
                 <!-- Inspection Details Fields -->
                 <div class="form-group">
-                    <label>Scheduled Inspection Date</label>
-                    <input type="date" class="form-control" id="scheduledInspectionDate" >
+                    <label for="scheduledInspectionDate">Scheduled Inspection Date</label>
+                    <input type="date" class="form-control" id="scheduledInspectionDate" placeholder="Scheduled Inspection Date">
                 </div>
                 <div class="form-group">
-                    <label for="">Submitted Inspection Date</label>
-                    <input type="date" class="form-control" id="submittedInspectionDate">
+                    <label for="submittedInspectionDate">Submitted Inspection Date</label>
+                    <input type="date" class="form-control" id="submittedInspectionDate" placeholder="Submitted Inspection Date">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="reportType" value="Report Type: ">
+                    <input type="text" class="form-control" id="reportType" placeholder="Report Type">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="project" placeholder="" >Project: </textarea>
-                    
+                    <textarea class="form-control autogrow" id="project" placeholder="Project"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="inspector" placeholder="">Inspector: </textarea>
+                    <textarea class="form-control autogrow" id="inspector" placeholder="Inspector"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="supplier" placeholder="">Supplier: </textarea>
+                    <textarea class="form-control autogrow" id="supplier" placeholder="Supplier"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="buyer" placeholder="">Buyer: </textarea>
+                    <textarea class="form-control autogrow" id="buyer" placeholder="Buyer"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="qtyToInspect" placeholder="">Qty to Inspect: </textarea>
+                    <textarea class="form-control autogrow" id="qtyToInspect" placeholder="Qty to Inspect"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="totalPOItemsQty" placeholder="">Total PO Items Qty: </textarea>
+                    <textarea class="form-control autogrow" id="totalPOItemsQty" placeholder="Total PO Items Qty"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="sampleInspected" placeholder="">Sample Inspected: </textarea>
+                    <textarea class="form-control autogrow" id="sampleInspected" placeholder="Sample Inspected"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="approvedBy" placeholder="">Approved By: </textarea>
+                    <textarea class="form-control autogrow" id="approvedBy" placeholder="Approved By"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="contactName" placeholder="">Contact Name: </textarea>
+                    <textarea class="form-control" id="contactName" placeholder="Contact Name"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="contactNumber" placeholder="">Contact Number: </textarea>
+                    <textarea class="form-control" id="contactNumber" placeholder="Contact Number"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Created Date</label>
-                    <input type="date" class="form-control" id="createdDate" placeholder="">
+                    <label for="createdDate">Created Date</label>
+                    <input type="date" class="form-control" id="createdDate" placeholder="Created Date">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="sampleSize" placeholder="">Sample Size: </textarea>
+                    <textarea class="form-control autogrow" id="sampleSize" placeholder="Sample Size"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="company" placeholder="">Company: </textarea>
+                    <textarea class="form-control autogrow" id="company" placeholder="Company"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="bookingComments" placeholder="">Booking Comments: </textarea>
+                    <textarea class="form-control autogrow" id="bookingComments" placeholder="Booking Comments"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="poNumber" placeholder="">PO #: </textarea>
+                    <textarea class="form-control" id="poNumber" placeholder="PO #"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="etd" placeholder="">ETD: </textarea>
+                    <textarea class="form-control autogrow" id="etd" placeholder="ETD"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="eta" placeholder="">ETA: </textarea>
+                    <textarea class="form-control autogrow" id="eta" placeholder="ETA"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Order Date</label>
-                    <input type="date" class="form-control" id="orderDate" placeholder="">
+                    <label for="orderDate">Order Date</label>
+                    <input type="date" class="form-control" id="orderDate" placeholder="Order Date">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="origin" placeholder="">Origin: </textarea>
+                    <textarea class="form-control autogrow" id="origin" placeholder="Origin"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="supplierERPId" placeholder="">Supplier ERP ID: </textarea>
+                    <textarea class="form-control autogrow" id="supplierERPId" placeholder="Supplier ERP ID"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="description" placeholder="">Description: </textarea>
+                    <textarea class="form-control autogrow" id="description" placeholder="Description"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="retailPrice" placeholder="">Retail Price: </textarea>
+                    <textarea class="form-control autogrow" id="retailPrice" placeholder="Retail Price"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="style" placeholder="">Style: </textarea>
+                    <textarea class="form-control autogrow" id="style" placeholder="Style"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="size" placeholder="">Size: </textarea>
+                    <textarea class="form-control autogrow" id="size" placeholder="Size"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="packingType" placeholder="">Packing Type: </textarea>
+                    <textarea class="form-control autogrow" id="packingType" placeholder="Packing Type"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="ymMasterPO" placeholder="">YM Master PO: </textarea>
+                    <textarea class="form-control autogrow" id="ymMasterPO" placeholder="YM Master PO"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="inspectedQtyPcs" placeholder="">Inspected Qty (Pcs): </textarea>
+                    <textarea class="form-control autogrow" id="inspectedQtyPcs" placeholder="Inspected Qty (Pcs)"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="color" placeholder="">Color: </textarea>
+                    <textarea class="form-control autogrow" id="color" placeholder="Color"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="masterCartonPackedQty" placeholder="">Master Carton / Packed Qty: </textarea>
+                    <textarea class="form-control autogrow" id="masterCartonPackedQty" placeholder="Master Carton / Packed Qty"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="department" placeholder="">Department: </textarea>
+                    <textarea class="form-control autogrow" id="department" placeholder="Department"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="ymStyleNumber" placeholder="">YM STYLE Number: </textarea>
+                    <textarea class="form-control autogrow" id="ymStyleNumber" placeholder="YM STYLE Number"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="masterCartonPackedQtyCtns" placeholder="">Master Carton / Packed Quantity (Ctns): </textarea>
+                    <textarea class="form-control autogrow" id="masterCartonPackedQtyCtns" placeholder="Master Carton / Packed Quantity (Ctns)"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="percentagePacked" placeholder="">Percentage packed (%): </textarea>
+                    <textarea class="form-control autogrow" id="percentagePacked" placeholder="Percentage packed (%)"></textarea>
                 </div>
-    
+                
                 <!-- Checklists Section -->
                 <h2 class="form-section-header">Checklists</h2>
                 <!-- Checklists Fields -->
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="checklists" placeholder="">Checklists: </textarea>
+                    <textarea class="form-control autogrow" id="checklists" placeholder="Checklists"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="packagingLabelling" placeholder="">Packing, Packaging & Labelling: </textarea>
+                    <textarea class="form-control autogrow" id="packagingLabelling" placeholder="Packing, Packaging & Labelling"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="product" placeholder="">Product: </textarea>
+                    <textarea class="form-control autogrow" id="product" placeholder="Product"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="qualityPlanDefects" placeholder="">Total Product + Quality Plan Defects: </textarea>
+                    <textarea class="form-control autogrow" id="qualityPlanDefects" placeholder="Total Product + Quality Plan Defects"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="acceptRejectQty" placeholder="">Accept/Reject Qty: </textarea>
+                    <textarea class="form-control autogrow" id="acceptRejectQty" placeholder="Accept/Reject Qty"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control autogrow" id="comments" placeholder="Comments:" rows="5"></textarea>
+                    <textarea class="form-control autogrow" id="comments" placeholder="Comments" rows="5"></textarea>
                 </div>
+                
     
                 <!-- Photo Upload Section -->
                 <h2 class="form-section-header">Add Photos</h2>
@@ -494,20 +497,441 @@ textareas.forEach(function(textarea) {
     }, 800); // Adjust the delay (in milliseconds) as needed
 
     
+    // function convertHTMLtoPDF() {
+    //         const { jsPDF } = window.jspdf;
+ 
+    //         let doc = new jsPDF('p', 'mm', [1600, 1200]);
+    //         let pdfjs = document.querySelector('#mainContent');
+ 
+    //         doc.html(pdfjs, {
+    //             callback: function(doc) {
+    //                 doc.save("newpdf.pdf");
+    //             },
+    //             x: 12,
+    //             y: 12
+    //         });                
+    //     }    
+
     function convertHTMLtoPDF() {
-            const { jsPDF } = window.jspdf;
- 
-            let doc = new jsPDF('p', 'mm', [1600, 1200]);
-            let pdfjs = document.querySelector('#mainContent');
- 
-            doc.html(pdfjs, {
-                callback: function(doc) {
-                    doc.save("newpdf.pdf");
+
+        // Create a PDF document
+
+        const final_inspection = document.getElementById('final_inspection').value;
+        const Scheduled_Inspection_Date = document.getElementById('scheduledInspectionDate').value;
+        const Submitted_Inspection_Date = document.getElementById('submittedInspectionDate').value;
+        const Report_Type = document.getElementById('reportType').value;
+        const project = document.getElementById('project').value;
+        const Inspector = document.getElementById('inspector').value;
+        const Supplier = document.getElementById('supplier').value;
+        const Buyer = document.getElementById('buyer').value;
+        const Qty_to_Inspect = document.getElementById('qtyToInspect').value;
+        const Total_PO_Items_Qty = document.getElementById('totalPOItemsQty').value;
+        const Sample_Inspected = document.getElementById('sampleInspected').value;
+        const Approved_By = document.getElementById('approvedBy').value;
+        const Contact_Name = document.getElementById('contactName').value;
+        const Contact_Number = document.getElementById('contactNumber').value;
+        const Created_Date = document.getElementById('createdDate').value;
+        const Sample_Size = document.getElementById('sampleSize').value;
+        const company = document.getElementById('company').value;
+        const bookingComments = document.getElementById('bookingComments').value;
+        const poNumber = document.getElementById('poNumber').value;
+        const etd = document.getElementById('etd').value;
+        const eta = document.getElementById('eta').value;
+        const orderDate = document.getElementById('orderDate').value;
+        const origin = document.getElementById('origin').value;
+        const supplierERPId = document.getElementById('supplierERPId').value;
+        const description = document.getElementById('description').value;
+        const retailPrice = document.getElementById('retailPrice').value;
+        const style = document.getElementById('style').value;
+        const size = document.getElementById('size').value;
+        const packingType = document.getElementById('packingType').value;
+        const ymMasterPO = document.getElementById('ymMasterPO').value;
+        const inspectedQtyPcs = document.getElementById('inspectedQtyPcs').value;
+        const color = document.getElementById('color').value;
+        const masterCartonPackedQty = document.getElementById('masterCartonPackedQty').value;
+        const department = document.getElementById('department').value;
+        const ymStyleNumber = document.getElementById('ymStyleNumber').value;
+        const masterCartonPackedQtyCtns = document.getElementById('masterCartonPackedQtyCtns').value;
+        const percentagePacked = document.getElementById('percentagePacked').value;
+        const checklists = document.getElementById('checklists').value;
+        const packagingLabelling = document.getElementById('packagingLabelling').value;
+        const product = document.getElementById('product').value;
+        const qualityPlanDefects = document.getElementById('qualityPlanDefects').value;
+        const acceptRejectQty = document.getElementById('acceptRejectQty').value;
+        const comments = document.getElementById('comments').value;
+        // const comment1 = document.getElementById('comment1').value;
+        // const photoUpload1 = document.getElementById('photoUpload1').value;
+        // const imageInput = document.getElementById('photoUpload1');
+        // const file = imageInput.files[0];
+        // const comment2 = document.getElementById('comment2').value;
+        // const comment3 = document.getElementById('comment3').value;
+        // const comment4 = document.getElementById('comment4').value;
+
+
+
+
+
+
+
+
+
+
+        var docDefinition = {
+            
+            content: [
+    { text: 'ABS INSPECTION', style: 'header1' },
+    { text: `APPAREL BUYER SOLUTION`, style: 'header3' },
+    { text: `FINAL INSPECTION ${final_inspection}`, style: 'header4'}, 
+    {
+            style: 'tableExample',
+            table: {
+                widths: ['*', '*'],
+                body: [
+     
+                    ['Scheduled Inspection Date', 'Submitted Inspection Date'],
+                    [`${Scheduled_Inspection_Date}`, `${Submitted_Inspection_Date}`],
+                    
+                    // ... (add other rows in the same format)
+                ]
+            }
+            
+        },
+    {
+        style: 'tableExample1',
+            table: {
+                widths: [95, '*',95,'*'],
+                body: [
+     
+                ['Report Type', `${Report_Type}`,'Project',`${project}`],
+                ['Inspector', `${Inspector}`, 'Supplier', `${Supplier}`],
+                ['Buyer', `${Buyer}`, 'Qty to Inspect', `${Qty_to_Inspect}`],
+                ['Total PO Items Qty', `${Total_PO_Items_Qty}`, 'Sample Inspected', `${Sample_Inspected}`],
+                ['Approved By', `${Approved_By}`, 'Contact Name', `${Contact_Name}`],
+                ['Contact Number', `${Contact_Number}`, 'Created Date', `${Created_Date}`],
+                ['Sample Size', `${Sample_Size}`, 'Company', `${company}`],
+                ['Booking Comments', `${bookingComments}`, 'PO #', `${poNumber}`],
+                ['ETD', `${etd}`, 'ETA', `${eta}`],
+                ['Order Date', `${orderDate}`, 'Origin', `${origin}`],
+                ['Supplier ERP ID', `${supplierERPId}`, 'Description', `${description}`],
+                ['Retail Price', `${retailPrice}`, 'Style', `${style}`],
+                ['Size', `${size}`, 'Packing Type', `${packingType}`],
+                ['YM Master PO', `${ymMasterPO}`, 'Inspected Qty (Pcs)', `${inspectedQtyPcs}`],
+                ['Color', `${color}`, 'Master Carton / Packed Qty', `${masterCartonPackedQty}`],
+                ['Department', `${department}`, 'YM STYLE Number', `${ymStyleNumber}`],
+                ['Master Carton / Packed Quantity (Ctns)', `${masterCartonPackedQtyCtns}`, 'Percentage Packed (%)', `${percentagePacked}`],
+                ['Checklists', `${checklists}`, 'Packing, Packaging & Labelling', `${packagingLabelling}`],
+                ['Product', `${product}`, 'Total Product + Quality Plan Defects', `${qualityPlanDefects}`],
+                ['Accept/Reject Qty', `${acceptRejectQty}`, 'Comments', `${comments}`]
+                    
+                    // ... (add other rows in the same format)
+                ]
+            }
+
+            
+    },
+
+    { text: `Checklists`,style: 'header2' },
+    { 
+        
+            table: {
+                widths: ['*', '*'],
+                body: [
+     
+                ['Checklists', `${checklists}`],
+                ['Packing, Packaging & Labelling', `${packagingLabelling}`],
+                ['Product', `${product}`],
+                ['Total Product + Quality Plan Defects', `${qualityPlanDefects}`],
+                ['Accept/Reject Qty', `${acceptRejectQty}`],
+                ['Comments', `${comments}`],
+                
+                    
+
+                ]
+            }
+     },
+    // { text: `Report Type: ${Report_Type}` },
+    // { text: `Project: ${project}` },
+    // { text: `Inspector: ${Inspector}` },
+    // { text: `Supplier: ${Supplier}` },
+    // { text: `Buyer: ${Buyer}` },
+    // { text: `Qty to Inspect: ${Qty_to_Inspect}` },
+    // { text: `Total PO Items Qty: ${Total_PO_Items_Qty}` },
+    // { text: `Sample Inspected: ${Sample_Inspected}` },
+    // { text: `Approved By: ${Approved_By}` },
+    // { text: `Contact Name: ${Contact_Name}` },
+    // { text: `Contact Number: ${Contact_Number}` },
+    // { text: `Created Date: ${Created_Date}` },
+    // { text: `Sample Size: ${Sample_Size}` },
+    // { text: `Company: ${company}` },
+    // { text: `Booking Comments: ${bookingComments}` },
+    // { text: `PO #: ${poNumber}` },
+    // { text: `ETD: ${etd}` },
+    // { text: `ETA: ${eta}` },
+    // { text: `Order Date: ${orderDate}` },
+    // { text: `Origin: ${origin}` },
+    // { text: `Supplier ERP ID: ${supplierERPId}` },
+    // { text: `Description: ${description}` },
+    // { text: `Retail Price: ${retailPrice}` },
+    // { text: `Style: ${style}` },
+    // { text: `Size: ${size}` },
+    // { text: `Packing Type: ${packingType}` },
+    // { text: `YM Master PO: ${ymMasterPO}` },
+    // { text: `Inspected Qty (Pcs): ${inspectedQtyPcs}` },
+    // { text: `Color: ${color}` },
+    // { text: `Master Carton / Packed Qty: ${masterCartonPackedQty}` },
+    // { text: `Department: ${department}` },
+    // { text: `YM STYLE Number: ${ymStyleNumber}` },
+    // { text: `Master Carton / Packed Quantity (Ctns): ${masterCartonPackedQtyCtns}` },
+    // { text: `Percentage Packed (%): ${percentagePacked}` },
+
+    // { text: `Checklists: ${checklists}` },
+    // { text: `Packing, Packaging & Labelling: ${packagingLabelling}` },
+    // { text: `Product: ${product}` },
+    // { text: `Total Product + Quality Plan Defects: ${qualityPlanDefects}` },
+    // { text: `Accept/Reject Qty: ${acceptRejectQty}` },
+    // { text: `Comments: ${comments}` },
+
+
+    
+],
+
+            styles: {
+                header: {
+                    margin: [0,60, 0, 0],
+                    fontSize: 30,
+                    bold: true,
+
+
                 },
-                x: 12,
-                y: 12
-            });                
-        }    
+                header3: {
+                    margin: [0,0, 20, 20],
+                    fontSize: 12,
+                    alignment: 'center',
+                    color: '#4c6e78',
+              
+
+
+                },
+                header4: {
+                    
+                    fontSize: 15,
+  
+
+              
+
+
+                },
+                header1: {
+                    fontSize: 22,
+            bold: true,
+            alignment: 'center',
+            margin: [0, 10, 0, 0], // Top margin increased for visual separation
+            color: '#4E5D6C' // A neutral, professional color
+            },
+            header2: {
+                fontSize: 15,
+            italics: true,
+            alignment: 'center',
+            margin: [0, 5, 0, 20] // Bottom margin increased to separate from the table
+            },
+            tableExample: {
+            margin: [0, 5, 0, 15],
+            color: '#006800',
+        },
+        tableHeader: {
+            bold: true,
+            fontSize: 13,
+            color: 'white',
+            fillColor: '#4E5D6C', // Header background color
+            alignment: 'left'
+        }
+
+                
+          },
+          background: function(currentPage, pageSize) {
+        // Draw a rectangle with a dashed border
+        return {
+            canvas: [
+                {
+                    type: 'rect',
+                    x: 20, // Closer to the edge
+                    y: 20, // Closer to the edge
+                    w: pageSize.width - 40, // Wider to accommodate the page size
+                    h: pageSize.height - 40, // Taller to accommodate the page size
+                    lineWidth: 1,
+                    lineColor: 'black',
+                    dash: { length: 5, space: 3 }
+                }
+            ]
+        };
+    }
+
+        };
+
+
+
+
+// // Helper function to read and process each file input
+// function getImagesFromInput(inputId) {
+//     return new Promise((resolve, reject) => {
+//         const input = document.getElementById(inputId);
+//         const files = input.files;
+//         const promises = [];
+
+//         // Process each file
+//         for (let file of files) {
+//             const promise = new Promise((res, rej) => {
+//                 const reader = new FileReader();
+//                 reader.readAsDataURL(file);
+//                 reader.onload = () => res({ image: reader.result, width: 350, height: 400 }); // Adjust width as needed
+//                 reader.onerror = (error) => rej(error);
+//             });
+//             promises.push(promise);
+//         }
+
+//         // Resolve all promises for this input
+//         Promise.all(promises).then(images => {
+//             resolve(images);
+//         });
+//     });
+// }
+
+// // Collect all file inputs
+// const inputs = ['photoUpload1', 'photoUpload2', 'photoUpload3', 'photoUpload4'];
+
+// // Process all inputs and add their images to the document definition
+// Promise.all(inputs.map(id => getImagesFromInput(id))).then(allImagesArr => {
+//     allImagesArr.forEach((images, index) => {
+//         // Retrieve the comment from the corresponding comment field
+//         const commentId = `comment${index + 1}`;
+//         const commentText = document.getElementById(commentId).value;
+
+//         // Add a title and comment for each photo upload input
+//         docDefinition.content.push({ text: `Section`, style: 'header' });
+//         docDefinition.content.push({ text: `Comment: ${commentText}`, style: 'subheader' }); // Style as needed
+
+
+
+//         // Create rows of images with a maximum of 4 images per row
+//         const imageRows = [];
+//         for (let i = 0; i < images.length; i += 4) {
+//             imageRows.push(images.slice(i, i + 4));
+//         }
+
+//         // Add the image rows to the document definition with margins
+//         imageRows.forEach(row => {
+//             const rowContent = row.map(img => ({
+//                 image: img.image,
+//                 width: 100, // Adjust width as needed
+//                 height: 130, // Adjust height as needed
+//                 margin: [5, 5, 5, 5] // Adjust margins as needed
+//             }));
+//             docDefinition.content.push({ columns: rowContent });
+//         });
+
+//         // Add extra space after each set of images
+//         docDefinition.content.push({ text: '', margin: [0, 20, 0, 20] }); // Adjust space as needed
+//     });
+
+//     // Generate and download the PDF
+//     pdfMake.createPdf(docDefinition).download('final_inspection_report.pdf');
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Helper function to read and process each file input
+function getImagesFromInput(inputId) {
+    return new Promise((resolve, reject) => {
+        const input = document.getElementById(inputId);
+        const files = input.files;
+        const promises = [];
+
+        // Process each file
+        for (let file of files) {
+            const promise = new Promise((res, rej) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => res({ image: reader.result }); // Removed width and height here
+                reader.onerror = (error) => rej(error);
+            });
+            promises.push(promise);
+        }
+
+        // Resolve all promises for this input
+        Promise.all(promises).then(images => {
+            resolve(images);
+        });
+    });
+}
+
+// Collect all file inputs
+const inputs = ['photoUpload1', 'photoUpload2', 'photoUpload3', 'photoUpload4'];
+
+// Process all inputs and add their images to the document definition
+Promise.all(inputs.map(id => getImagesFromInput(id))).then(allImagesArr => {
+    allImagesArr.forEach((images, index) => {
+        // Retrieve the comment from the corresponding comment field
+        const commentId = `comment${index + 1}`;
+        const commentText = document.getElementById(commentId).value;
+
+        // Add a title and comment for each photo upload input
+        docDefinition.content.push({ text: `Section ${index + 1}`, style: 'header' });
+        docDefinition.content.push({ text: `Comment: ${commentText}`, style: 'subheader' });
+
+        // Create rows of images with a maximum of 4 images per row
+        const imageRows = [];
+        for (let i = 0; i < images.length; i += 4) {
+            imageRows.push(images.slice(i, i + 4));
+        }
+
+        // Add the image rows to the document definition with margins
+        imageRows.forEach(row => {
+            const rowContent = row.map(img => ({
+                image: img.image,
+                width: 130, // Adjusted width to fit 4 images nicely in a row
+                margin: [5, 5, 5, 5] // Consistent margins around images
+            }));
+            docDefinition.content.push({ columns: rowContent });
+        });
+
+        // Add extra space after each set of images
+        docDefinition.content.push({ text: '', margin: [0, 20, 0, 20] });
+    });
+
+    // Generate and download the PDF
+    pdfMake.createPdf(docDefinition).download('final_inspection_report.pdf');
+});
+
+
+
+
+
+
+
+
+
+
+
+    }
+
 
 </script>
 
